@@ -1,0 +1,21 @@
+; To test for the issue, move the test from util to core
+
+(library
+ (name util)
+ (inline_tests)
+ (preprocess
+  (pps ppx_inline_test))
+ (modules util))
+
+(library
+ (name core)
+ (modules core)
+ ; (inline_tests)
+ ; (preprocess
+ ;  (pps ppx_inline_test))
+ (libraries util))
+
+(executable
+ (name test)
+ (modules test)
+ (libraries core))
